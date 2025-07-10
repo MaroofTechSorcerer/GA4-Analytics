@@ -1,0 +1,26 @@
+# Ignore Google credentials and sensitive files
+*.json
+!ga4_fields.json
+!*.schema.json
+
+# Ignore Python virtual environments
+venv/
+ENV/
+.env
+
+# Ignore Streamlit cache and logs
+.streamlit/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore zip/csv output
+*.zip
+*.csv
+
+# Do NOT ignore main code files or deployment scripts
