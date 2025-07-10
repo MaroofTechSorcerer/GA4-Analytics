@@ -1,4 +1,4 @@
-import language_model_api as lm
+import openai
 import json
 from ga4_fields import GA4_METRICS, GA4_DIMENSIONS, UA_TO_GA4
 
@@ -15,7 +15,7 @@ def validate_fields(fields, valid_set, mapping):
     return valid, invalid
 
 def nlq_to_ga4_params(nl_query, api_key):
-    lm.api_key = api_key
+    openai.api_key = api_key
     prompt = f"""
 You are an expert Google Analytics 4 assistant for a tech company. Your job is to analyze and translate ANY custom user query about their website's analytics into valid Google Analytics 4 API parameters. Do NOT copy or repeat examples. Instead, always analyze the user's question and generate the correct metrics, dimensions, and filters for a live GA4 API call.
 
@@ -41,8 +41,8 @@ A: {{"rephrase": "How many conversions for the 'blue widget' event?"}}
 Now, analyze the user's question and output the correct JSON for a live GA4 API call:
 """
     try:
-        response = lm.ChatCompletion.create(
-            model="best-available-nlq-model",
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=400,
             temperature=0
